@@ -1,0 +1,45 @@
+{
+  "name": "autonym-examples",
+  "description": "Example apps using the Autonym framework.",
+  "keywords": [
+    "autonym",
+    "examples"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "precommit": "lint-staged",
+    "prettier": "prettier --write '{*/src/**/*.{js,json},*.js,.*rc,.*.json}'"
+  },
+  "lint-staged": {
+    "{*/src/**/*.{js,json},*.js,.*rc,.*.json}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*/src/**/*.{js,json}": [
+      "eslint",
+      "git add"
+    ]
+  },
+  "engines": {
+    "node": ">=4.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmiller42/autonym-examples.git"
+  },
+  "author": "Matt Miller <me@mmiller.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mmiller42/autonym-examples/issues"
+  },
+  "homepage": "https://github.com/mmiller42/autonym-examples#readme",
+  "devDependencies": {
+    "babel-eslint": "^8.0.0",
+    "eslint": "^4.7.1",
+    "eslint-config-prettier": "^2.5.0",
+    "eslint-plugin-import": "^2.7.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.2.1",
+    "prettier": "^1.7.0"
+  }
+}
