@@ -28,3 +28,103 @@ Alternatively, you can build from the source and then start the app.
 npm run build
 npm start
 ```
+
+### Example requests
+
+#### Create a new person
+
+```bash
+curl -H 'Content-Type: application/json' -X POST -d '{"firstName":"Matt","lastName":"Miller"}' http://localhost:3000/people
+```
+
+```json
+{
+  "id": "1",
+  "firstName": "Matt",
+  "lastName": "Miller"
+}
+```
+
+#### Schema validation error
+
+```bash
+curl -H 'Content-Type: application/json' -X POST -d '{"firstName":"Matt"}' http://localhost:3000/people
+```
+
+```json
+{
+  "message": "Schema validation for model \"person\" failed."
+  "errors": [
+    {
+      "keyword": "required",
+      "dataPath": "",
+      "schemaPath": "#/required",
+      "params": { "missingProperty": "lastName" },
+      "message": "should have required property 'lastName'"
+    }
+  ]
+}
+```
+
+#### Find people
+
+```bash
+curl http://localhost:3000/people
+```
+
+```json
+[
+  {
+    "id": "1",
+    "firstName": "Matt",
+    "lastName": "Miller"
+  }
+]
+```
+
+#### Find one person
+
+```bash
+curl http://localhost:3000/people/1
+```
+```json
+{
+  "id": "1",
+  "firstName": "Matt",
+  "lastName": "Miller"
+}
+```
+
+#### Update a property on a person
+
+```bash
+curl -H 'Content-Type: application/json' -X PATCH -d '{"firstName":"Matthew"}' http://localhost:3000/people/1
+```
+
+```json
+{
+  "id": "1",
+  "firstName": "Matthew",
+  "lastName": "Miller"
+}
+```
+
+#### Delete a person
+
+```bash
+curl -X DELETE http://localhost:3000/people/1
+```
+
+```json
+{ "id": "1" }
+```
+
+#### Not found error
+
+```bash
+curl http://localhost:3000/people/1
+```
+
+```json
+{ "message": "Record not found" }
+```

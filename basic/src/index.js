@@ -8,32 +8,28 @@ const crash = err => {
   process.exit(1)
 }
 
-// Make sure we crash on uncaught rejections (default Node behavior is inconsistent with synchronous exceptions)
-// See http://2ality.com/2016/04/unhandled-rejections.html#unhandled-rejections-in-nodejs
-process.on('unhandledRejection', crash)
-
 const app = express()
 app.use(bodyParser.json({}))
 
-// Models may need to be initialized, so `createModelMiddleware` returns a promise. This means that it's important that
-// any Express middleware that should be loaded *after* Autonym should only be attached to the app inside this function.
-const mountAutonym = async () => {
-  // Mount Autonym middleware
-  app.use(await createModelMiddleware({ models }))
-  app.use(createResponderMiddleware())
-  console.log('Autonym is ready')
+const modelMiddleware = createModelMiddleware({ models })
 
-  // Express' default error middleware prints errors; if an uncaught exception is thrown (that wasn't a client error),
-  // we should crash the app.
-  // eslint-disable-next-line no-unused-vars
-  app.use((err, req, res, next) => {
-    if (!err.isAutonymError || !err.isClientError()) {
-      crash(err)
-    }
-  })
-}
+// Listen for errors that occur when models are initialized. If you don't do this and any init functions for models
+// throw errors, they will be processed by Node's default unhandledRejection event handler, which may not report the
+// error and will not crash the app.
+Promise.all(modelMiddleware.modelInitializations).catch(crash)
 
-mountAutonym()
+// Mount Autonym middleware
+app.use(modelMiddleware)
+app.use(createResponderMiddleware())
+
+// Express' default error middleware prints errors; if an uncaught exception is thrown (that wasn't a client error),
+// we should crash the app.
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+  if (!err.isAutonymError || !err.isClientError()) {
+    crash(err)
+  }
+})
 
 // Start HTTP server
 app.listen(process.env.PORT || 3000, () => console.log('API is ready'))
