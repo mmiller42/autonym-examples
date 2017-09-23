@@ -8,7 +8,7 @@ Clone the repository to your machine and install the dependencies for this examp
 
 ```bash
 git clone https://github.com/mmiller42/autonym-examples.git
-cd autonym-examples/basic
+cd autonym-examples/policies
 npm install
 ```
 
@@ -40,7 +40,8 @@ curl -H 'Content-Type: application/json' -X POST -d '{"username":"mmiller42","pa
 ```json
 {
   "id": "1",
-  "username": "mmiller42"
+  "username": "mmiller42",
+  "creationTimestamp": 1506209958
 }
 ```
 
@@ -54,7 +55,8 @@ curl http://localhost:3000/users
 [
   {
     "id": "1",
-    "username": "mmiller42"
+    "username": "mmiller42",
+    "creationTimestamp": 1506209958
   }
 ]
 ```
@@ -67,42 +69,45 @@ curl http://localhost:3000/users/1
 ```json
 {
   "id": "1",
-  "username": "mmiller42"
+  "username": "mmiller42",
+  "creationTimestamp": 1506209958
 }
 ```
 
 #### Update username without affecting password
 
 ```bash
-curl -H 'Content-Type: application/json' -X PATCH -d '{"username":"jgalt42"}' http://localhost:3000/people/1
+curl -H 'Content-Type: application/json' -X PATCH -d '{"username":"jgalt42"}' http://localhost:3000/users/1
 ```
 
 ```json
 {
   "id": "1",
-  "username": "jgalt42"
+  "username": "jgalt42",
+  "creationTimestamp": 1506209958
 }
 ```
 
 #### Update password
 
 ```bash
-curl -H 'Content-Type: application/json' -X PATCH -d '{"password":"87654321"}' http://localhost:3000/people/1
+curl -H 'Content-Type: application/json' -X PATCH -d '{"password":"87654321"}' http://localhost:3000/users/1
 ```
 
 ```json
 {
   "id": "1",
-  "username": "jgalt42"
+  "username": "jgalt42",
+  "creationTimestamp": 1506209958
 }
 ```
 
-#### Delete a person
+#### Attempt to delete a user
 
 ```bash
-curl -X DELETE http://localhost:3000/people/1
+curl -X DELETE http://localhost:3000/users/1
 ```
 
 ```json
-{ "id": "1" }
+{ "message": "This action may not be performed." }
 ```

@@ -7,4 +7,4 @@ Example apps using the [Autonym framework](https://github.com/mmiller42/autonym)
 ## Examples
 
 * [basic](basic/)
-
+* [policies](policies/)
