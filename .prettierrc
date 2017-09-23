@@ -5,7 +5,7 @@
   "printWidth": 120,
   "overrides": [
     {
-      "files": ".*rc",
+      "files": [".*rc.json", ".prettierrc"],
       "options": { "parser": "json" }
     }
   ]

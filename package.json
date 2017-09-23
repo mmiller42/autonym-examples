@@ -8,10 +8,10 @@
   "scripts": {
     "lint": "eslint .",
     "precommit": "lint-staged",
-    "prettier": "prettier --write '{*/src/**/*.{js,json},*.js,.*rc,.*.json}'"
+    "prettier": "prettier --write '{*/src/**/*.{js,json},*.js,.*rc.json,.prettierrc,.*.json}'"
   },
   "lint-staged": {
-    "{*/src/**/*.{js,json},*.js,.*rc,.*.json}": [
+    "{*/src/**/*.{js,json},*.js,.*rc.json,.prettierrc,.*.json}": [
       "prettier --write",
       "git add"
     ],
