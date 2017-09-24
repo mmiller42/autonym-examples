@@ -7,7 +7,7 @@ export default new Model({
     type: 'object',
     properties: {
       creationTimestamp: { type: 'number' },
-      username: { type: 'string', minLength: 6, maxLength: 24 },
+      username: { type: 'string', minLength: 5, maxLength: 24 },
       password: { type: 'string', minLength: 8, maxLength: 24 },
     },
     required: ['creationTimestamp', 'username', 'password'],
