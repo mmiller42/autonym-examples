@@ -68,7 +68,7 @@ export default function createSqliteStore(tableName, createTableQuery) {
 
       // Here is where we can throw a not found error if the result is null
       if (!result) {
-        throw new AutonymError(AutonymError.NOT_FOUND, 'The record was not found.')
+        throw new AutonymError(AutonymError.NOT_FOUND, 'Record not found')
       }
       return result
     },
@@ -95,7 +95,7 @@ export default function createSqliteStore(tableName, createTableQuery) {
 
       const { result } = await promisify(cb => db.get(`SELECT * FROM ${tableName} WHERE id = $id`, { $id: id }, cb))
       if (!result) {
-        throw new AutonymError(AutonymError.NOT_FOUND, 'The record was not found.')
+        throw new AutonymError(AutonymError.NOT_FOUND, 'Record not found')
       }
       return result
     },
@@ -106,7 +106,7 @@ export default function createSqliteStore(tableName, createTableQuery) {
         db.run(`DELETE FROM ${tableName} WHERE id = $id`, { $id: id }, cb)
       )
       if (recordCount === 0) {
-        throw new AutonymError(AutonymError.NOT_FOUND, 'The record was not found.')
+        throw new AutonymError(AutonymError.NOT_FOUND, 'Record not found')
       }
     },
     // Our serialize and unserialize functions are used to convert our data to snake_case before it is passed to the

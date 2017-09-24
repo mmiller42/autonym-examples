@@ -109,5 +109,7 @@ curl -X DELETE http://localhost:3000/users/1
 ```
 
 ```json
-{ "message": "This action may not be performed." }
+{
+  "message": "This action may not be performed."
+}
 ```

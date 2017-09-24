@@ -164,7 +164,9 @@ curl -H 'Authorization: 2' -X DELETE http://localhost:3000/users/1
 ```
 
 ```json
-{ "message": "You must be an administrator to perform this action." }
+{
+  "message": "You must be an administrator to perform this action."
+}
 ```
 
 #### Update a user as an admin to be another admin

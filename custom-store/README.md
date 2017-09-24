@@ -53,7 +53,7 @@ curl -H 'Content-Type: application/json' -X POST -d '{"firstName":"Matt"}' http:
 
 ```json
 {
-  "message": "Schema validation for model \"person\" failed."
+  "message": "Schema validation for model \"person\" failed.",
   "errors": [
     {
       "keyword": "required",
@@ -116,7 +116,9 @@ curl -X DELETE http://localhost:3000/people/1
 ```
 
 ```json
-{ "id": "1" }
+{
+  "id": "1"
+}
 ```
 
 #### Not found error
@@ -126,5 +128,7 @@ curl http://localhost:3000/people/1
 ```
 
 ```json
-{ "message": "Record not found" }
+{
+  "message": "Record not found"
+}
 ```
