@@ -18,6 +18,10 @@ An introduction to using policies. Demonstrates how policies can be applied to v
 
 A more complex example demonstrating how you can programmatically access model instances in policies, as well as cache the results of expensive functions via the meta object, to share data among policies. Also demonstrates the power of combining multiple policies into expressions in the model configuration.
 
+### [sql-store](sql-store/)
+
+The basic example adapted to use a SQL database. This example uses Postgres, but the Autonym implementation is powered by [Knex](http://knexjs.org/) and [Bookshelf](http://bookshelfjs.org/), so it also supports other SQL dialects.
+
 ### [custom-store](custom-store/)
 
 A modification of the basic example that demonstrates how to create a custom store for a model using SQLite.

@@ -1,0 +1,9 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+CREATE SCHEMA IF NOT EXISTS "example";
+
+CREATE TABLE IF NOT EXISTS "example"."people" (
+  "id" UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  "first_name" CHARACTER VARYING NOT NULL,
+  "last_name" CHARACTER VARYING NOT NULL
+);
